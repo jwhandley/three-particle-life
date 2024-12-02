@@ -88,11 +88,12 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x181818);
 
 
-const camera = new THREE.OrthographicCamera(-window.innerWidth / 2, window.innerWidth / 2, window.innerHeight / 2, -window.innerHeight / 2);
+const camera = new THREE.OrthographicCamera(-window.innerWidth / 2, window.innerWidth / 2, window.innerHeight / 2, -window.innerHeight / 2, -10, 10000);
 camera.position.z = 20;
 
 const controls = new MapControls(camera, renderer.domElement);
 controls.screenSpacePanning = true;
+controls.enableRotate = false;
 controls.minZoom = 1 / 1.5;
 
 setup();
