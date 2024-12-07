@@ -9,11 +9,11 @@ import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 export let attractionMatrix: number[][];
 
 export const params = {
-    size: 3,
+    size: 5,
     beta: 0.3,
-    maxRadius: 60,
-    forceMultiplier: 4,
-    velocityDecay: 10,
+    maxRadius: 100,
+    forceMultiplier: 5,
+    velocityDecay: 15,
     colorCount: 5,
     particleCount: 5000,
     randomizePositions: () => {
@@ -41,7 +41,7 @@ let particleRenderer: ParticleRenderer;
 
 const gui = new GUI();
 gui.add(params, 'beta', 0, 1).step(0.01).name("Beta");
-gui.add(params, 'maxRadius', 0, 100).step(1).name("Max Radius");
+gui.add(params, 'maxRadius', 0, 200).step(1).name("Max Radius");
 gui.add(params, 'forceMultiplier', 1, 10).step(0.1).name("Force multiplier");
 gui.add(params, 'velocityDecay', 0, 50).step(1).name("Velocity decay");
 gui.add(params, 'particleCount', 1000, 10000).step(100).name("Particle count").onChange((v) => {
@@ -69,7 +69,7 @@ function setup() {
         }
     }
     scene.clear();
-    particleSystem = new ParticleSystem(params.particleCount, window.innerWidth, window.innerHeight);
+    particleSystem = new ParticleSystem(params.particleCount, window.innerWidth * 2, window.innerHeight * 2);
     particleRenderer = new ParticleRenderer(particleSystem, pointTexture);
     scene.add(particleRenderer);
 }

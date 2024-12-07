@@ -80,12 +80,20 @@ export class ParticleSystem extends THREE.EventDispatcher {
             this.positions[i * 2] += this.velocities[i * 2] * dt;
             this.positions[i * 2 + 1] += this.velocities[i * 2 + 1] * dt;
 
-            const r = Math.pow(this.positions[i * 2], 2) + Math.pow(this.positions[i * 2 + 1], 2);
-            if (r > this.width * this.height) {
-                this.positions[i * 2] = randFloat(-this.width / 2, this.width / 2);
-                this.positions[i * 2 + 1] = randFloat(-this.height / 2, this.height / 2);
-                this.velocities[i * 2] = 0;
-                this.velocities[i * 2 + 1] = 0;
+            if (this.positions[i * 2] < -this.width / 2) {
+                this.positions[i * 2] = this.width / 2 + (this.width / 2 + this.positions[i * 2]);
+            }
+
+            if (this.positions[i * 2] > this.width / 2) {
+                this.positions[i * 2] = -this.width / 2 + (this.positions[i * 2] - this.width / 2);
+            }
+
+            if (this.positions[i * 2 + 1] < -this.height / 2) {
+                this.positions[i * 2 + 1] = this.height / 2 + (this.height / 2 + this.positions[i * 2 + 1]);
+            }
+
+            if (this.positions[i * 2 + 1] > this.height / 2) {
+                this.positions[i * 2 + 1] = -this.height / 2 + (this.positions[i * 2 + 1] - this.height / 2);
             }
         }
 
